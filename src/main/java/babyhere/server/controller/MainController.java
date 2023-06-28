@@ -168,8 +168,9 @@ public class MainController {
     }
 
     @PostMapping("/completion/chat")
-    public CompletionChatResponse completionChat(final @RequestBody GPTCompletionChatRequest gptCompletionChatRequest) {
+    public CompletionChatResponse completionChat(final @RequestBody String message) {
 
+        GPTCompletionChatRequest gptCompletionChatRequest = new GPTCompletionChatRequest("gpt-3.5-turbo", "user", message, 1000);
         return gptChatRestService.completionChat(gptCompletionChatRequest);
     }
 

@@ -13,13 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 public class GPTCompletionChatRequest {
 
-    private String model;
+    private String model = "gpt-3.5-turbo";
 
-    private String role;
+    private String role = "user";
 
     private String message;
 
-    private Integer maxTokens;
+    private Integer maxTokens = 1000;
 
 
     public static ChatCompletionRequest of(GPTCompletionChatRequest request) {
