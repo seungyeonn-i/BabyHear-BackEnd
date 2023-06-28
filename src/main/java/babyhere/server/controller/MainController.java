@@ -1,11 +1,12 @@
 package babyhere.server.controller;
 
+import babyhere.server.gpt.dto.CompletionChatResponse;
+import babyhere.server.gpt.dto.GPTCompletionChatRequest;
+import babyhere.server.gpt.service.GPTChatRestService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -18,6 +19,8 @@ import java.nio.file.StandardCopyOption;
 @Slf4j
 @CrossOrigin(origins = "*")
 public class MainController {
+
+    private final GPTChatRestService gptChatRestService;
 
 
     @GetMapping("/hello")
@@ -163,4 +166,13 @@ public class MainController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 업로드 중 오류가 발생했습니다.");
         }
     }
+
+    @PostMapping("/completion/chat")
+    public CompletionChatResponse completionChat(final @RequestBody GPTCompletionChatRequest gptCompletionChatRequest) {
+
+        return gptChatRestService.completionChat(gptCompletionChatRequest);
+    }
+
+
+
 }
